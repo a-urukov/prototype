@@ -1,0 +1,12 @@
+{
+    "name": "firstling",
+    "version": "0.0.1",
+    "directory": "libs",
+    "ignore": [],
+    "dependencies": {
+        "romochka": "git://github.yandex-team.ru/lego/romochka.git#2.10.25",
+        "bem-bl": "git://github.com/bem/bem-bl.git#0.3.19",
+        "bem-components": "git://github.com/bem/bem-components.git#1.26.0",
+        "islands-components": "git://github.yandex-team.ru/lego/islands-components.git#2.0.0"
+    }
+}

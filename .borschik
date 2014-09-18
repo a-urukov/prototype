@@ -1,0 +1,6 @@
+{
+    "paths": {
+        "./desktop.blocks": "/static/",
+        "./libs": "/static/"
+    }
+}

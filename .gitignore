@@ -1,0 +1,9 @@
+/node_modules
+.idea
+libs
+.DS_Store
+.bem/cache
+.bem/tmp
+desktop.bundles/direct/*
+!desktop.bundles/direct/direct.bemdecl.js
+Dockerfile

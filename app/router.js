@@ -1,5 +1,7 @@
 'use strict';
 
+var fs = require('fs');
+
 module.exports = {
 
     /**
@@ -8,10 +10,21 @@ module.exports = {
      */
     init: function(app) {
 
-        app.get('/', function(req, res) {
-            res.send('test');
+        app.all('*', function(req, res, next) {
+            var path = req.params[0].split('/').filter(function(p) { return p }),
+                method = req.method.toLowerCase(),
+                controllerPath = __dirname + '/controllers/' + (path[0] || 'index') + '.js',
+                controller = fs.existsSync(controllerPath) && require(controllerPath),
+                action = path[1] || 'index';
+
+            if (controller && controller[method] && controller[method][action]) {
+                controller[method][action](req, res, next);
+            } else {
+                res.send(404);
+            }
         });
 
     }
+
 
 };

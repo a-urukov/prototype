@@ -1,12 +1,23 @@
-module.exports = {
+'use strict';
 
-    get: {
+var AbstractController = require('./abstract.js');
 
-        index: function(req, res, next) {
+/**
+ * Главная страница
+ * @constructor
+ */
+function Index(req, res) {
+    AbstractController.apply(this, arguments);
+}
 
-            res.send('this is morda');
-        }
+Index.prototype = Object.create(AbstractController.prototype);
 
+Index.prototype.get = {
+
+    index: function() {
+        this._res.send('this.isMorda=true');
     }
 
 };
+
+module.exports = Index;

@@ -21,16 +21,10 @@ module.exports = function(config) {
             [ require('enb/techs/js-i18n'), { target: '?.{lang}.pre.js', lang: '{lang}' } ]
         ]);
 
-        // клиентский bemhtml
-        nodeConfig.addTechs([
-            [ require('enb/techs/bemdecl-from-deps-by-tech'), { target: '?.bemhtml.bemdecl.js', sourceTech: 'js', destTech: 'bemhtml' } ],
-            [ require('enb/techs/deps-old'), { bemdeclTarget: '?.bemhtml.bemdecl.js', depsTarget: '?.bemhtml.deps.js' } ],
-            [ require('enb/techs/files'), { filesTarget: '?.bemhtml.files', dirsTarget: '?.bemhtml.dirs', depsTarget: '?.bemhtml.deps.js' } ]
-        ]);
 
         // склеиваем: клиентский bemhtml + локализационные js
         nodeConfig.addTechs(config.getLanguages().map(function(lang) {
-            return [ require('enb/techs/file-merge'), { sources: ['?.client.bemhtml.js', '?.' + lang + '.pre.js'], target: '?.' + lang + '.js' } ]
+            return [ require('enb/techs/file-merge'), { sources: ['?.' + lang + '.pre.js'], target: '?.' + lang + '.js' } ]
         }));
 
         // css + ie*.css
@@ -43,22 +37,17 @@ module.exports = function(config) {
             [require('enb/techs/css-ie9'), { sourceSuffixes: ['css', 'ie9.css']}]
         ]);
 
-        // серверный bemhtml + локализационный bemtree
+        // сборка шаблонов bh
         nodeConfig.addTechs([
-            [
-                require('./enb-techs/bemtree-i18n'),
-                {
-                    langTargets: ['all']
-                        .concat(config.getLanguages())
-                        .map(function(lang) {
-                            return '?.lang.' + lang + '.js'
-                        })
-                }
-            ]
+            [require('enb-bh/techs/bh-client'), { sourceSuffixes: 'bh.js', target: '?.bh.client.js', bhFile: 'bh/lib/bh.js' }],
+            [require('enb-bh/techs/bh-server'), { sourceSuffixes: 'bh.js', target: '?.bh.js', bhFile: 'bh/lib/bh.js' }]
+
         ]);
 
+
         nodeConfig.addTargets([
-            '_?.bemtree.js',
+            '?.bh.js',
+            '?.bh.client.js',
             '_?.{lang}.js',
             '_?.css',
             '_?.ie.css',
@@ -72,10 +61,6 @@ module.exports = function(config) {
     config.mode('development', function() {
         config.node('desktop.bundles/direct', function(nodeConfig) {
             nodeConfig.addTechs([
-                [ require('enb-bemhtml/techs/bemhtml'), { devMode: true } ],
-                [ require('enb-bemhtml/techs/bemhtml'), { filesTarget: '?.bemhtml.files', target: '?.client.bemhtml.js', devMode: true } ],
-                [ require('enb-bemxjst/techs/bemtree'), { sourceSuffixes: 'bemtree', target: '?.bemtree.js', devMode: true } ],
-                [ require('enb/techs/borschik'), { sourceTarget: '?.all.bemtree.js', destTarget: '_?.bemtree.js', minify: false } ],
                 [ require('enb/techs/borschik'), { sourceTarget: '?.{lang}.js', destTarget: '_?.{lang}.js', minify: false } ],
                 [ require('enb/techs/borschik'), { freeze: true, sourceTarget: '?.css', destTarget: '_?.css', minify: true } ],
                 [ require('enb/techs/borschik'), { freeze: true, sourceTarget: '?.ie.css', destTarget: '_?.ie.css', minify: true } ],
@@ -90,10 +75,6 @@ module.exports = function(config) {
     config.mode('production', function() {
         config.node('desktop.bundles/direct', function(nodeConfig) {
             nodeConfig.addTechs([
-                [ require('enb-bemhtml/techs/bemhtml'), { devMode: false } ],
-                [ require('enb-bemhtml/techs/bemhtml'), { filesTarget: '?.bemhtml.files', target: '?.client.bemhtml.js', devMode: false } ],
-                [ require('enb-bemxjst/techs/bemtree'), { sourceSuffixes: 'bemtree', target: '?.bemtree.js', devMode: false } ],
-                [ require('enb/techs/borschik'), { sourceTarget: '?.all.bemtree.js', destTarget: '_?.bemtree.js', minify: false } ],
                 [ require('enb/techs/borschik'), { sourceTarget: '?.{lang}.js', destTarget: '_?.{lang}.js', minify: true } ],
                 [ require('enb/techs/borschik'), { freeze: true, sourceTarget: '?.css', destTarget: '_?.css', minify: true } ],
                 [ require('enb/techs/borschik'), { freeze: true, sourceTarget: '?.ie.css', destTarget: '_?.ie.css', minify: true } ],
@@ -116,9 +97,9 @@ function getLevels(config) {
         { path: 'libs/romochka/blocks-desktop', check: false },
         { path: 'libs/islands-components/common.blocks', check: false },
         { path: 'libs/islands-components/desktop.blocks', check: false },
-        { path: 'libs/adv-blocks', check: false },
+//        { path: 'libs/adv-blocks', check: false },
 //        { path: 'libs/bem-mvc/common.blocks', check: true },
-        'common.blocks',
+//        'common.blocks',
         'desktop.blocks'
     ]
         .map(function(levelPath) {

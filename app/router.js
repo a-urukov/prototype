@@ -1,5 +1,7 @@
 'use strict';
 
+var bh = require('../desktop.bundles/direct/direct.bh.js');
+
 module.exports = {
 
     /**
@@ -9,7 +11,11 @@ module.exports = {
     init: function(app) {
 
         app.get('/', function(req, res) {
-            res.send('test');
+            var bemjson = bh.processBemJson({
+                block: 'p-morda'
+            });
+
+            res.send(bh.apply(bemjson));
         });
 
     }

@@ -1,6 +1,7 @@
 'use strict';
 
-var AbstractController = require('./abstract.js');
+var AbstractController = require('./abstract.js'),
+    bh = require('../../desktop.bundles/direct/direct.bh.js');
 
 /**
  * Главная страница
@@ -15,7 +16,12 @@ Index.prototype = Object.create(AbstractController.prototype);
 Index.prototype.get = {
 
     index: function() {
-        this._res.send('this.isMorda=true');
+
+        var bemjson = bh.processBemJson({
+            block: 'p-morda'
+        });
+
+        this._res.send(bh.apply(bemjson));
     }
 
 };

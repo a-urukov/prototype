@@ -15,7 +15,9 @@ Phrases.prototype = Object.create(AbstractController.prototype);
 Phrases.prototype.get = {
 
     index: function() {
-        this._res.send('this is phrases');
+        this._serviceContainer.require(['user'], function(user) {
+            this._res.send('this is phrases, hello ' + user);
+        }.bind(this));
     },
 
     all: function(a) {

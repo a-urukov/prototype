@@ -1,5 +1,5 @@
 module.exports = function(bh) {
-    bh.match('b-phrase', function(ctx) {
+    bh.match('b-phrase', function(ctx, json) {
 
         ctx.tag('tr');
 
@@ -12,8 +12,17 @@ module.exports = function(bh) {
                 }
             },
             {
-                elem: 'count',
-                content: 'phrase&nbsp;' + ctx.ctx.count
+                elem: 'phrase',
+                content: {
+                    block: 'dropdown',
+                    mods: { switcher : 'link', theme : 'normal' },
+                    switcher: 'phrase&nbsp;' + json.count,
+                    popup: {
+                        block: 'b-phrase-edit',
+                        mods: { comment: json.count % 2 ? 'yes' : ''},
+                        pid: json.count
+                    }
+                }
             },
             {
                 elem: 'ctr',
@@ -46,7 +55,7 @@ module.exports = function(bh) {
                 }
             },
             {
-                elem: 'count',
+                elem: 'phrase',
                 content: 'all phrases'
             },
             {
@@ -69,9 +78,6 @@ module.exports = function(bh) {
         ctx.tag('td')
     });
 
-    bh.match('b-phrase__count', function(ctx) {
-        ctx.tag('td')
-    });
 
     bh.match('b-phrase__ctr', function(ctx) {
         ctx.tag('td')
@@ -85,5 +91,8 @@ module.exports = function(bh) {
         ctx.tag('td')
     });
 
+    bh.match('b-phrase__phrase', function(ctx) {
+        ctx.tag('td')
+    });
 
 };

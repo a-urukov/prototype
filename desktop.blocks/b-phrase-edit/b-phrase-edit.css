@@ -1,0 +1,15 @@
+.b-phrase-edit
+{
+    padding: 20px;
+}
+
+.b-phrase-edit .b-phrase-edit__textarea
+{
+    display: block;
+    margin: 15px 0;
+}
+
+.b-phrase-edit__save-button
+{
+    vertical-align: top;
+}

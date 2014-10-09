@@ -4,13 +4,14 @@ exports.blocks = [
         elems: [
             {
                 name: 'dom',
-                mods: [{ name: 'init', vals: ['auto'] }]
+                mods: { 'init': 'auto' }
             },
             { name: 'elem' },
             { name: 'i18n' },
             { name: 'interface' }
         ]
     },
+    { name: 'ua' },
     { name: 'b-page' },
     { name: 'p-morda' },
     { name: 'b-phrase' },

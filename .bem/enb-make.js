@@ -81,13 +81,10 @@ function getLevels(config) {
     return [
         { path: 'libs/bem-core/common.blocks', check: false },
         { path: 'libs/bem-core/desktop.blocks', check: false },
-        { path: 'libs/bem-components/touch.blocks', check: false },
         { path: 'libs/bem-components/common.blocks', check: false },
         { path: 'libs/bem-components/design/common.blocks', check: false },
         { path: 'libs/bem-components/desktop.blocks', check: false },
         { path: 'libs/bem-components/design/desktop.blocks', check: false },
-        { path: 'libs/bem-components/touch.blocks', check: false },
-        { path: 'libs/bem-components/design/touch.blocks', check: false },
 //        { path: 'libs/adv-blocks', check: false },
 //        { path: 'libs/bem-mvc/common.blocks', check: true },
 //        'common.blocks',

@@ -17,6 +17,8 @@ Phrases.prototype.get = {
 
     index: function() {
 
+        bh.setOptions({ jsAttrName: 'data-bem', jsAttrScheme: 'json' });
+
         var bemjson = bh.processBemJson({
             block: 'b-page',
             content: {

@@ -1,15 +1,18 @@
 module.exports = function(bh) {
     bh.match('b-page', function(ctx) {
 
-        ctx.
-            tag('html').
-            content([
+        ctx
+            .tag('html')
+            .js(true)
+            .mix({ block: 'ua', mods: { js: 'no' } })
+            .content([
             {
                 elem: 'head',
                 content: [
                     { elem: 'style', src: '/bundles/direct.css' },
                     { elem: 'script', src: '//yastatic.net/jquery/2.1.1/jquery.min.js' },
-                    { elem: 'script', src: '/bundles/direct.js' }
+                    { elem: 'script', src: '/bundles/direct.js' },
+                    { block: 'ua' }
                 ]
             },
             {

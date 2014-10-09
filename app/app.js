@@ -15,6 +15,7 @@ app.init = function() {
         .use(express.urlencoded())
         .use(express.cookieParser())
         .use('/bundles', express.static(__dirname + '/../desktop.bundles/direct'))
+        .use('/static', express.static(__dirname + '/../libs'))
         .use(express.errorHandler());
 
     // Регистрация роутов

@@ -1,6 +1,7 @@
 'use strict';
 
-var AbstractController = require('./abstract.js');
+var AbstractController = require('./abstract.js'),
+    bh = require('../../desktop.bundles/direct/direct.bh.js');
 
 /**
  * Фразы
@@ -15,7 +16,29 @@ Phrases.prototype = Object.create(AbstractController.prototype);
 Phrases.prototype.get = {
 
     index: function() {
-        this._res.send('this is phrases');
+
+        var bemjson = bh.processBemJson({
+            block: 'b-page',
+            content: {
+                block: 'p-phrases',
+                model: {
+                    phrases: [
+                        {
+                            ctr: 2,
+                            clicks: 3,
+                            price: 4
+                        },
+                        {
+                            ctr: 5,
+                            clicks: 6,
+                            price: 7
+                        }
+                    ]
+                }
+            }
+        });
+
+        this._res.send(bh.apply(bemjson));
     },
 
     all: function(a) {

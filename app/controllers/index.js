@@ -18,7 +18,17 @@ Index.prototype.get = {
     index: function() {
 
         var bemjson = bh.processBemJson({
-            block: 'p-morda'
+            block: 'b-page',
+            content: {
+                block: 'p-morda',
+                model: {
+                    title: 'My header',
+                    content: 'My content',
+                    inside: {
+                        inside: 'inside model'
+                    }
+                }
+            }
         });
 
         this._res.send(bh.apply(bemjson));

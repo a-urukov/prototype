@@ -1,15 +1,7 @@
 module.exports = function(bh) {
     bh.match('p-morda', function(ctx) {
 
-        ctx.model = {
-            title: 'My header',
-            content: 'My content',
-            inside: {
-                inside: 'inside model'
-            }
-        };
-
-        ctx.content = [
+        ctx.content([
             {
                 elem: 'header',
                 field: 'title'
@@ -24,12 +16,10 @@ module.exports = function(bh) {
             },
             {
                 block: 'inside',
-                model: ctx.model.inside,
+                model: ctx.ctx.model.inside,
                 field: 'inside'
             }
-        ];
+        ]);
 
-        return ctx;
-
-    })
+    });
 };

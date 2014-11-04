@@ -1,0 +1,30 @@
+.p-phrases {
+    margin: 20px;
+}
+
+.p-phrases__phrases
+{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.p-phrases__phrases td
+{
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+
+.p-phrases__controls
+{
+    margin-top: 20px;
+}
+
+.p-phrases__controls-row
+{
+    margin-top: 5px;
+}
+
+.p-phrases__show-all
+{
+    float: right;
+}

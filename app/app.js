@@ -19,6 +19,7 @@ app.init = function() {
 
     // Регистрация роутов
     require('./router').init(expressApp);
+    require('backbone');
 
     expressApp.listen(8080);
 };

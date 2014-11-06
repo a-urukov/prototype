@@ -88,7 +88,8 @@ function getLevels(config) {
 //        { path: 'libs/adv-blocks', check: false },
 //        { path: 'libs/bem-mvc/common.blocks', check: true },
 //        'common.blocks',
-        'desktop.blocks'
+        'desktop.blocks',
+        'models'
     ]
         .map(function(levelPath) {
             return config.resolvePath(levelPath);

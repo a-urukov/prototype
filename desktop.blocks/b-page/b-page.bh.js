@@ -4,19 +4,22 @@ module.exports = function(bh) {
         ctx
             .tag('html')
             .js(true)
-            .mix({ block: 'ua', mods: { js: 'no' } })
+            .mix([{ block: 'ua', mods: { js: 'no' } }])
             .content([
             {
                 elem: 'head',
                 content: [
                     { elem: 'style', src: '/bundles/direct.css' },
                     { elem: 'script', src: '//yastatic.net/jquery/2.1.1/jquery.min.js' },
+                    { elem: 'script', src: '//yastatic.net/underscore/1.6.0/underscore.js' },
+                    { elem: 'script', src: '//yastatic.net/backbone/1.1.2/backbone.js' },
                     { elem: 'script', src: '/bundles/direct.js' },
                     { block: 'ua' }
                 ]
             },
             {
                 elem: 'body',
+                mix: { block: 'i-model', js: true },
                 content: [
                     {
                         elem: 'header',

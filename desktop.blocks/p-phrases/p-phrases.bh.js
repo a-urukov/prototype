@@ -63,7 +63,8 @@ module.exports = function(bh) {
                     return {
                         block: 'b-phrase',
                         count: i,
-                        model: phrase
+                        model: phrase,
+                        modelName: 'm-phrase'
                     }
                 })))
 

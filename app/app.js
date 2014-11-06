@@ -1,6 +1,6 @@
-'use strict';
-
 var app = module.exports;
+
+models = {};
 
 /**
  * Инициализирвать приложение

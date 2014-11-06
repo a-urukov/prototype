@@ -12,6 +12,9 @@ exports.blocks = [
         ]
     },
     { name: 'ua' },
+    { name: 'i-model' },
+    { name: 'banner' },
+    { name: 'phrase' },
     { name: 'b-page' },
     { name: 'p-morda' },
     { name: 'b-phrase' },

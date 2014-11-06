@@ -1,48 +1,48 @@
 module.exports = function(bh) {
     bh.match('b-phrase', function(ctx, json) {
 
-        ctx.tag('tr');
-
-        ctx.content([
-            {
-                elem: 'checkbox',
-                content: {
-                    block: 'checkbox',
-                    mods: { theme: 'normal', size: 'm' }
-                }
-            },
-            {
-                elem: 'phrase',
-                content: {
-                    block: 'dropdown',
-                    mods: { switcher : 'link', theme : 'normal' },
-                    switcher: 'phrase&nbsp;' + json.count,
-                    popup: {
-                        block: 'b-phrase-edit',
-                        mods: { comment: json.count % 2 ? 'yes' : ''},
-                        pid: json.count
+        ctx
+            .tag('tr')
+            .js(true)
+            .content([
+                {
+                    elem: 'checkbox',
+                    content: {
+                        block: 'checkbox',
+                        mods: { theme: 'normal', size: 'm' }
+                    }
+                },
+                {
+                    elem: 'phrase',
+                    content: {
+                        block: 'dropdown',
+                        mods: { switcher : 'link', theme : 'normal' },
+                        switcher: 'phrase&nbsp;' + json.count,
+                        popup: {
+                            block: 'b-phrase-edit',
+                            mods: { comment: json.count % 2 ? 'yes' : ''},
+                            pid: json.count
+                        }
+                    }
+                },
+                {
+                    elem: 'ctr',
+                    field: 'ctr'
+                },
+                {
+                    elem: 'clicks',
+                    field: 'clicks'
+                },
+                {
+                    elem: 'input',
+                    content: {
+                        block: 'input',
+                        mods: { theme: 'normal', size: 'm' },
+                        mix: { block: 'b-phrase', elem: 'price' },
+                        content: { elem: 'control' }
                     }
                 }
-            },
-            {
-                elem: 'ctr',
-                field: 'ctr'
-            },
-            {
-                elem: 'clicks',
-                field: 'clicks'
-            },
-            {
-                elem: 'input',
-                content: {
-                    block: 'input',
-                    mods: { theme: 'normal', size: 'm' },
-                    mix: { block: 'b-phrase', elem: 'price' },
-                    content: { elem: 'control' }
-                }
-            }
-        ])
-
+            ]);
     });
 
     bh.match('b-phrase_header_yes', function(ctx) {

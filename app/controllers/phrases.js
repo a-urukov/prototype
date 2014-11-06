@@ -46,8 +46,33 @@ Phrases.prototype.get = {
         }.bind(this));
     },
 
-    all: function(a) {
-        this._res.send('this is 100500 phrases ' + a);
+    all: function() {
+
+        this._serviceContainer.require(['user'], function(user) {
+            var phrases = [];
+
+            for (var i = 0; i < 2900; i++) {
+                phrases.push({
+                    ctr: 2,
+                    clicks: 3,
+                    price: 4
+                });
+            }
+
+            bh.setOptions({ jsAttrName: 'data-bem', jsAttrScheme: 'json' });
+
+            var bemjson = bh.processBemJson({
+                block: 'b-page',
+                content: {
+                    block: 'p-phrases',
+                    model: {
+                        phrases: phrases
+                    }
+                }
+            });
+
+            this._res.send(bh.apply(bemjson));
+        }.bind(this));
     }
 
 };

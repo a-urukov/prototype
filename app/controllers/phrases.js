@@ -13,66 +13,45 @@ function Phrases(req, res) {
 
 Phrases.prototype = Object.create(AbstractController.prototype);
 
+Phrases.prototype._show = function(limit) {
+    (require('mapping')).map('banner', this._serviceContainer.getService('banner')).then(function(banner) {
+
+        bh.setOptions({ jsAttrName: 'data-bem', jsAttrScheme: 'json' });
+
+        limit && (banner.phrases = banner.phrases.slice(0, limit));
+
+        var bemjson = bh.processBemJson({
+            block: 'b-page',
+            content: {
+                block: 'p-phrases',
+                model: banner
+            }
+        });
+
+        this._res.send(bh.apply(bemjson));
+    }.bind(this));
+};
+
 Phrases.prototype.get = {
 
     index: function() {
-
-        this._serviceContainer.require(['user'], function(user) {
-
-            bh.setOptions({ jsAttrName: 'data-bem', jsAttrScheme: 'json' });
-
-            var bemjson = bh.processBemJson({
-                block: 'b-page',
-                content: {
-                    block: 'p-phrases',
-                    model: {
-                        phrases: [
-                            {
-                                ctr: 2,
-                                clicks: 3,
-                                price: 4
-                            },
-                            {
-                                ctr: 5,
-                                clicks: 6,
-                                price: 7
-                            }
-                        ]
-                    }
-                }
-            });
-
-            this._res.send(bh.apply(bemjson));
-        }.bind(this));
+        this._show(10);
     },
 
     all: function() {
-
-        this._serviceContainer.require(['user'], function(user) {
-            var phrases = [];
-
-            for (var i = 0; i < 2900; i++) {
-                phrases.push({
-                    ctr: 2,
-                    clicks: 3,
-                    price: 4
-                });
-            }
-
-            bh.setOptions({ jsAttrName: 'data-bem', jsAttrScheme: 'json' });
-
-            var bemjson = bh.processBemJson({
-                block: 'b-page',
-                content: {
+        if (!this._req.xhr) {
+            this._show();
+        } else {
+            (require('mapping')).map('banner', this._serviceContainer.getService('banner')).then(function(banner) {
+                var bemjson = bh.processBemJson({
                     block: 'p-phrases',
-                    model: {
-                        phrases: phrases
-                    }
-                }
-            });
+                    elem: 'phrases',
+                    phrases: banner.phrases
+                });
 
-            this._res.send(bh.apply(bemjson));
-        }.bind(this));
+                this._res.send(bh.apply(bemjson));
+            }.bind(this));
+        }
     }
 
 };

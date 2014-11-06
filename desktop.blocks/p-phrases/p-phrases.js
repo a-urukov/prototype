@@ -23,6 +23,12 @@ provide(BEMDOM.decl('p-phrases', {
 
     showAll: function() {
         window.history.pushState(null, null, '/phrases/all');
+        this.setMod(this.elem('loading'), 'show', 'yes');
+
+        $.ajax('/phrases/all').success(function(data) {
+            this.findElem('phrases').replaceWith(data);
+            this.delMod(this.elem('loading'), 'show');
+        }.bind(this));
     }
 
 }));

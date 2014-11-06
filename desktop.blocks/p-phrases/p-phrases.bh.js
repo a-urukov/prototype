@@ -6,14 +6,7 @@ module.exports = function(bh) {
             .content([
                 {
                     elem: 'phrases',
-                    content: [{ block: 'b-phrase', mods: { header: 'yes' } }]
-                        .concat(ctx.ctx.model.phrases.map(function(phrase, i) {
-                            return {
-                                block: 'b-phrase',
-                                count: i,
-                                model: phrase
-                            }
-                    }))
+                    phrases: ctx.ctx.model.phrases
                 },
                 {
                     elem: 'controls',
@@ -36,16 +29,23 @@ module.exports = function(bh) {
                                     mods: { theme: 'normal', size: 'm' },
                                     mix: { block: 'p-phrases', elem: 'show-all' },
                                     text: 'Show all'
+                                },
+                                {
+                                    elem: 'loading',
+                                    tag: 'span',
+                                    content: 'loading...'
                                 }
                             ]
                         },
                         {
                             elem: 'controls-row',
-                            content: {
-                                block: 'button',
-                                mods: { theme: 'normal', size: 'm' },
-                                text: 'Save'
-                            }
+                            content: [
+                                {
+                                    block: 'button',
+                                    mods: { theme: 'normal', size: 'm' },
+                                    text: 'Save'
+                                }
+                            ]
                         }
                     ]
                 }
@@ -54,7 +54,18 @@ module.exports = function(bh) {
     });
 
     bh.match('p-phrases__phrases', function(ctx) {
-        ctx.tag('table')
+
+        ctx
+            .tag('table')
+            .content(
+                [{ block: 'b-phrase', mods: { header: 'yes' } }]
+                .concat(ctx.ctx.phrases.map(function(phrase, i) {
+                    return {
+                        block: 'b-phrase',
+                        count: i,
+                        model: phrase
+                    }
+                })))
 
     });
 

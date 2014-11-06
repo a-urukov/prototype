@@ -28,3 +28,16 @@
 {
     float: right;
 }
+
+.p-phrases__loading
+{
+    float: right;
+    display: none;
+
+    padding: 10px;
+}
+
+.p-phrases__loading_show_yes
+{
+    display: inline;
+}

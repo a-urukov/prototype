@@ -803,11 +803,24 @@ BH.prototype = {
 
                     !json.content && (json.content = json.model[json.field]);
 
-
-                    !json.elem && (attrs['data-js'] = json.model);
                     attrs['data-field'] = json.field;
 
                     json.attrs = attrs;
+                }
+
+                if(json.model && !json.elem) {
+                    var attrs = json.attrs || {},
+                        mix = json.mix || [];
+
+                    attrs['data-model-name'] = json.modelName;
+                    attrs['data-model-id'] = json.model.id;
+                    attrs['data-model'] = JSON.stringify(json.model);
+
+                    mix.push({ block: 'i-model', elem: 'model' });
+
+                    json.mix = mix;
+                    json.attrs = attrs;
+
                 }
 
                 if (json.block) {

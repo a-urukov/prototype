@@ -1,1 +1,1 @@
-module.exports = Backbone.Model.extend({});
+module.exports = models['m-phrase'] = Backbone.Model.extend({});

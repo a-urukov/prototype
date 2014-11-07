@@ -29,7 +29,7 @@ Phrases.prototype._show = function(limit) {
         });
 
         this._res.send(bh.apply(bemjson));
-    }.bind(this));
+    }.bind(this)).done();
 };
 
 Phrases.prototype.get = {

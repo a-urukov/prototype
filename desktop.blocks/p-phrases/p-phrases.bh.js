@@ -46,6 +46,9 @@ module.exports = function(bh) {
                                     text: 'Save'
                                 }
                             ]
+                        },
+                        {
+                            block: 'b-phrase-edit'
                         }
                     ]
                 }
@@ -58,15 +61,14 @@ module.exports = function(bh) {
         ctx
             .tag('table')
             .content(
-                [{ block: 'b-phrase', mods: { header: 'yes' } }]
-                .concat(ctx.ctx.phrases.map(function(phrase, i) {
+                ctx.ctx.phrases.map(function(phrase, i) {
                     return {
                         block: 'b-phrase',
                         count: i,
                         model: phrase,
                         modelName: 'm-phrase'
                     }
-                })))
+                }))
 
     });
 

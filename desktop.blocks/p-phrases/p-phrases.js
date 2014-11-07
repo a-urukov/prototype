@@ -17,6 +17,10 @@ provide(BEMDOM.decl('p-phrases', {
                 e.target.setMod('disabled', 'yes');
                 this.showAll();
             }, this);
+
+            BEMDOM.blocks['b-phrase'].on(this.domElem, 'edit', function(e, data) {
+                this.findBlockInside('b-phrase-edit').show(e.target.domElem, data.id);
+            }, this);
         }
 
     },

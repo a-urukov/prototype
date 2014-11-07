@@ -3,7 +3,7 @@ module.exports = function(bh) {
 
         ctx
             .tag('tr')
-            .js(true)
+            .js({ id: json.model.id })
             .content([
                 {
                     elem: 'checkbox',
@@ -15,16 +15,19 @@ module.exports = function(bh) {
                 {
                     elem: 'phrase',
                     content: {
-                        block: 'dropdown',
-                        mods: { switcher : 'link', theme : 'normal' },
-                        switcher: 'phrase&nbsp;' + json.count,
-                        popup: {
-                            block: 'b-phrase-edit',
-                            mods: { comment: json.count % 2 ? 'yes' : ''},
-                            pid: json.count
+                        block: 'link',
+                        mods: { pseudo: true, theme: 'normal' },
+                        mix: [{ block: 'b-phrase', elem: 'edit' }],
+                        content: {
+                            block: 'b-phrase',
+                            elem: 'text',
+                            tag: 'span',
+                            model: json.model,
+                            field: 'text'
                         }
                     }
                 },
+
                 {
                     elem: 'ctr',
                     field: 'ctr'

@@ -13,3 +13,8 @@
 {
     vertical-align: top;
 }
+
+.b-phrase-edit__popup
+{
+    padding: 20px;
+}
